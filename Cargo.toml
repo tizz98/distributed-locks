@@ -1,6 +1,7 @@
-[package]
-name = "distributed-locks"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
+[workspace]
+members = [
+    "lock-core",
+    "lock-server",
+    "lock-cli"
+]
+resolver = "2"

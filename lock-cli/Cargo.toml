@@ -1,0 +1,14 @@
+[package]
+name = "lock-cli"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tonic = "0.14.0"
+tonic-prost = "0.14.0"
+prost = "0.14.1"
+
+[build-dependencies]
+tonic-prost-build = "0.14.0"

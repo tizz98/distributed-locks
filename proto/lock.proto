@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package lock;
+
+service LockService {
+  rpc AcquireLock(AcquireLockRequest) returns (AcquireLockResponse);
+  rpc ReleaseLock(ReleaseLockRequest) returns (ReleaseLockResponse);
+  rpc RenewLock(RenewLockRequest) returns (RenewLockResponse);
+  rpc GetLockStatus(GetLockStatusRequest) returns (GetLockStatusResponse);
+}
+
+message AcquireLockRequest {
+  string lock_id = 1;
+  string owner_id = 2;
+  int64 lease_ttl_ms = 3;
+}
+
+message AcquireLockResponse {
+  bool acquired = 1;
+  int64 fencing_token = 2;
+  string message = 3;
+}
+
+message ReleaseLockRequest {
+  string lock_id = 1;
+  string owner_id = 2;
+}
+
+message ReleaseLockResponse {
+  bool released = 1;
+  string message = 2;
+}
+
+message RenewLockRequest {
+  string lock_id = 1;
+  string owner_id = 2;
+  int64 lease_ttl_ms = 3;
+}
+
+message RenewLockResponse {
+  bool renewed = 1;
+  string message = 2;
+}
+
+message GetLockStatusRequest {
+  string lock_id = 1;
+}
+
+message GetLockStatusResponse {
+  bool is_locked = 1;
+  string owner_id = 2;
+  int64 fencing_token = 3;
+  int64 lease_expiry_ms = 4;
+}
